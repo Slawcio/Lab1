@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Lab1 gallery" />
+        <item
+            android:id="@+id/nav_music"
+            android:icon="@drawable/ic_music_note_black_24dp"
+            android:title="Lab2 music" />
+        <item
+            android:id="@+id/nav_video"
+            android:icon="@drawable/ic_video_label_black_24dp"
+            android:title="Lab3 video" />
+        <item
+            android:id="@+id/nav_music_shop"
+            android:icon="@drawable/ic_library_music_black_24dp"
+            android:title="Lab4 music shop" />
+
+
+
+
+</menu>
