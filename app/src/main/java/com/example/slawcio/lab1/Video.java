@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.VideoView;
 
 
@@ -75,21 +76,20 @@ public class Video extends android.support.v4.app.Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                VideoView videoView = new VideoView(getContext());
-//                String path = "android.resource://com.example.slawcio.lab1/" + VIDEOS[position];
-//                Uri uri = Uri.parse(path);
-//                videoView.setVideoURI(uri);
-//                videoView.seekTo(0);
-//
-//
-//
-//
-//
-//                videoView.start();
-//                if(videoView.getCurrentPosition()>1500){
-//                    videoView.pause();
-//                    videoView.seekTo(100);
-//                }
+
+                VideoView videoView = (VideoView) view.findViewById(R.id.video_item);
+                ImageView imageView = (ImageView) view.findViewById(R.id.image_item);
+                if(!videoView.isPlaying()) {
+                    imageView.setVisibility(View.GONE);
+                    videoView.setVisibility(View.VISIBLE);
+                    videoView.seekTo(0);
+                    videoView.start();
+                } else {
+                    videoView.pause();
+                    videoView.setVisibility(View.GONE);
+                    imageView.setVisibility(View.VISIBLE);
+                }
+
             }
         });
         gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {

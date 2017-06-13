@@ -63,22 +63,19 @@ public class VideoAdapter extends BaseAdapter{
 
     // create a new ImageViewSwipe for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = inflater.inflate(R.layout.grid_view_video_item, parent, false );
+        View view = convertView == null ? LayoutInflater.from(mContext).inflate(R.layout.grid_view_video_item, parent, false) : convertView;
+
         ImageView img = (ImageView) view.findViewById(R.id.image_item);
         VideoView videoView = (VideoView) view.findViewById(R.id.video_item);
-        if (convertView == null) { // if it's not recycled, initialize some
-            videoView.setVideoURI(Uri.parse(videos[position]));
-            videoView.setLayoutParams(new GridView.LayoutParams(new Double(getWidthOfScreen()).intValue(), new Double(getWidthOfScreen() * 0.75).intValue()));
-            Picasso.with(mContext).load(images[position])
-                    .resize(new Double(getWidthOfScreen()).intValue(), new Double(getWidthOfScreen()*0.75).intValue())
-                    .centerCrop()
-                    .into(img);
-        } else {
-            videoView = (VideoView) convertView;
-            img = (ImageView) convertView;
-        }
+        videoView.setVideoURI(Uri.parse(videos[position]));
+     //   videoView.setLayoutParams(new GridView.LayoutParams(new Double(getWidthOfScreen()).intValue(), new Double(getWidthOfScreen() * 0.75).intValue()));
+        Picasso.with(mContext).load(images[position])
+                .resize(new Double(getWidthOfScreen()).intValue(), new Double(getWidthOfScreen() * 0.75).intValue())
+                .centerCrop()
+                .into(img);
 
         videoView.setFocusable(false);
+
         return view;
     }
 

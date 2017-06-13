@@ -13,7 +13,7 @@ public class VideoPlayer extends AppCompatActivity {
     VideoView videoView;
     MediaController mediaController;
     Boolean isStarted = false;
-    int paused;
+    int paused = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,28 +26,27 @@ public class VideoPlayer extends AppCompatActivity {
         Uri uri = Uri.parse(path);
         videoView.setVideoURI(uri);
         videoView.seekTo(100);
+
+
     }
 
 
     public void playVideo(View view) {
-        if(!isStarted) {
-
-            //   videoView.setMediaController(mediaController);
-            //    mediaController.setAnchorView(videoView);
-            videoView.seekTo(0);
+        MediaPlayer.OnPreparedListener onPreparedListener = new MediaPlayer.OnPreparedListener() {
+            public void onPrepared(MediaPlayer mp) {
+                mp.seekTo(paused);
+            }
+        };
+        videoView.setOnPreparedListener(onPreparedListener);
             videoView.start();
-            setIsStarted();
-        } else {
-            videoView.seekTo(paused);
-            videoView.start();
-        }
+            paused = 0;
     }
 
     public void pauseVideo(View view) {
-        if(isStarted) {
-            paused = videoView.getCurrentPosition();
+
             videoView.pause();
-        }
+            paused = videoView.getCurrentPosition();
+
     }
 
     private void setIsStarted(){

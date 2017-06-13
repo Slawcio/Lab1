@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        changeFragment(new Video());
+        changeFragment(new Shop());
     }
 
 
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_video) {
             changeFragment(new Video());
         } else if (id == R.id.nav_music_shop) {
-            intent = new Intent(getApplicationContext(), null);
+            changeFragment(new Shop());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
