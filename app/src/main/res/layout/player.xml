@@ -11,7 +11,8 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBarLayout">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -21,39 +22,61 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:textSize="60dp"
+        android:text="0 zł"
+        android:layout_marginEnd="50dp"
+        android:layout_alignBottom="@+id/imageButton"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/tv_full_price" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:cropToPadding="true"
+        android:src="@drawable/cart"
+        android:background="@color/colorPrimaryDark"
+        android:layout_marginStart="18dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:layout_below="@+id/appBarLayout"
+        android:layout_alignStart="@+id/play" />
 
     <ImageView
         android:id="@+id/artist"
-        android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:srcCompat="@drawable/big_wild"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_height="290dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_full_price"
+        app:srcCompat="@drawable/big_wild" />
 
     <ImageButton
         android:id="@+id/play"
         android:onClick="play"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/artist"
-        android:layout_marginStart="40dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="0dp"
         android:background="@color/colorPrimaryDark"
         android:src="@drawable/play"
-        android:text="Button" />
+        android:text="Button"
+        android:layout_below="@+id/artist"
+        android:layout_alignParentStart="true" />
 
     <ImageButton
         android:id="@+id/pause"
         android:onClick="pause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/artist"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="37dp"
         android:background="@color/colorPrimaryDark"
         android:src="@drawable/pause"
-        android:text="Button" />
+        android:text="Button"
+        android:layout_below="@+id/artist"
+        android:layout_alignParentEnd="true" />
 
     <SeekBar
         android:id="@+id/volume"

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.slawcio.lab1.CartActivity"
+    android:background="@color/colorPrimaryDark">
+
+
+    <TextView
+        android:id="@+id/tv_full_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Full price: "
+        android:textColor="#ffffff"
+        android:textSize="50sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:id="@+id/list_cart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="false"
+        android:layout_below="@+id/tv_full_price"
+        android:layout_alignParentStart="true"
+        android:longClickable="true"
+        android:layout_above="@+id/button_buy"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/button_buy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:text="BUY" />
+</RelativeLayout>

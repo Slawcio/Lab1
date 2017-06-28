@@ -90,7 +90,7 @@ public class ImageViewSwipe extends AppCompatActivity {
 
         ActivityOptions options = ActivityOptions.makeScaleUpAnimation(layout, 0,
                 0, layout.getWidth(), layout.getHeight());
-        startActivity(intent);
+        startActivity(intent, options.toBundle());
     }
 
     @Override

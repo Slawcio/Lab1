@@ -77,6 +77,17 @@ public class Video extends android.support.v4.app.Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+
+                Intent intent = new Intent(getContext(), VideoPlayer.class);
+                intent.putExtra("video", VIDEOS[position]);
+                startActivity(intent);
+
+
+            }
+        });
+        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 VideoView videoView = (VideoView) view.findViewById(R.id.video_item);
                 ImageView imageView = (ImageView) view.findViewById(R.id.image_item);
                 if(!videoView.isPlaying()) {
@@ -89,17 +100,7 @@ public class Video extends android.support.v4.app.Fragment {
                     videoView.setVisibility(View.GONE);
                     imageView.setVisibility(View.VISIBLE);
                 }
-
-            }
-        });
-        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent intent = new Intent(getContext(), VideoPlayer.class);
-                intent.putExtra("video", VIDEOS[position]);
-                startActivity(intent);
-                return false;
+                return true;
             }
         });
 

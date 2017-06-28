@@ -1,5 +1,6 @@
 package com.example.slawcio.lab1;
 
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.design.widget.Snackbar;
@@ -9,10 +10,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
-import static com.example.slawcio.lab1.R.id.toolbar;
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 public class MusicPlayer extends AppCompatActivity {
 
@@ -29,7 +34,7 @@ public class MusicPlayer extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        setPrice();
         ImageView artist = (ImageView) findViewById(R.id.artist);
         artist.setImageResource(getIntent().getIntExtra("images", 0));
     //    ImageButton pauseButton = (ImageButton) findViewById(R.id.pause);
@@ -54,6 +59,14 @@ public class MusicPlayer extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
+            }
+        });
+        ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -96,12 +109,46 @@ public class MusicPlayer extends AppCompatActivity {
             }
             case R.id.favorite_item: //dodawanie do ulubionych!!!
             {
-                Snackbar.make(view, "Dodano do koszyka!", Snackbar.LENGTH_LONG)
+//                ArrayList<Integer> list = Cart.getInstance();
+//                if(!list.contains(getIntent().getIntExtra("images", 0)))
+//                list.add(getIntent().getIntExtra("images", 0));
+                addToCart();
+                setPrice();
+                if(Cart.ifChecked(getIntent().getIntExtra("images", 0)))
+                Snackbar.make(view, "Added to cart!", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
+                else
+                    Snackbar.make(view, "Removed from cart!", Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
                 return true;
             }
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setPrice();
+    }
+
+    private void setPrice(){
+        Cart.setFullPrice();
+        TextView price = (TextView) view.findViewById(R.id.tv_full_price);
+        price.setText(Cart.getFullPrice()+"$");
+    }
+
+    private boolean addToCart(){
+        ArrayList<CartActivity.Product> list = Cart.getInstance();
+        for(CartActivity.Product product : list){
+            if(product.getImage() == getIntent().getIntExtra("images", 0)){
+                product.changeIsChosen();
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

@@ -11,13 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import static com.example.slawcio.lab1.Cart.uploadData;
 
 
 public class Shop extends Fragment {
-
-    private static final int IMAGES[]={
-
-    };
 
     private static final int ROCK_IMAGES[]={
             R.drawable.the_doors,
@@ -117,15 +117,29 @@ public class Shop extends Fragment {
             R.raw.body_gold
     };
 
+    View view;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = (View) inflater.inflate(R.layout.fragment_shop, container, false);
+        uploadData();
+        view = (View) inflater.inflate(R.layout.fragment_shop, container, false);
         Button b1 = (Button) view.findViewById(R.id.slawcio_songs);
         Button b2 = (Button) view.findViewById(R.id.electronic);
         Button b3 = (Button) view.findViewById(R.id.classic);
         Button b4 = (Button) view.findViewById(R.id.rock);
+        TextView textView = (TextView) view.findViewById(R.id.tv_full_price);
+        textView.setText(Cart.getFullPrice() + "$");
+
+        ImageButton imageButton = (ImageButton) view.findViewById(R.id.imageButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CartActivity.class);
+                startActivity(intent);
+            }
+        });
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,5 +196,11 @@ public class Shop extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        TextView textView = (TextView) view.findViewById(R.id.tv_full_price);
+        textView.setText(Cart.getFullPrice() + "$");
+    }
 }
 
